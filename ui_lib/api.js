@@ -22,10 +22,10 @@ window._$hookui.__registeredPanels = {}
 //     icon: "Media/Game/Icons/BuildingLevel.svg",
 //     component: <$Panel title="City Monitor">This is my very own panel</$Panel>,
 // })
-window._$hookui.registerPanel = ({id, name, icon, component, body}) => {
+window._$hookui.registerPanel = ({id, name, icon, component, body, panel_style}) => {
     console.log('[HookUI] Registering UI for ', id, name)
     if (component) {
         console.warn(`[HookUI] ${id}:${name} is registered as a $Panel. Please pass in .body instead of .component with the children of $Panel`)
     }
-    window._$hookui.__registeredPanels[id] = {id, name, icon, component, body}
+    window._$hookui.__registeredPanels[id] = {id, name, icon, component, body, panel_style}
 }

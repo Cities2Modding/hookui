@@ -58,7 +58,7 @@ const $Loader = ({ react }) => {
             </div>
         } else if (p.body) {
             const el = React.createElement(p.body, {react: react})
-            return <$Panel key={p.id} title={p.name} react={react}>
+            return <$Panel key={p.id} title={p.name} react={react} style={p.panel_style || {}}>
                 {el}
             </$Panel>
         } else {
