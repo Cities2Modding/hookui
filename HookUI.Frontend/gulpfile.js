@@ -1,6 +1,7 @@
 const gulp = require('gulp');
 const esbuild = require('esbuild');
-const fs = require('fs-extra'); // fs-extra is an extended version of Node's fs module
+const fs = require('fs-extra');
+const path = require('path');
 
 gulp.task('build-jsx', function (done) {
     esbuild.build({
@@ -14,11 +15,20 @@ gulp.task('build-jsx', function (done) {
         }
         // Add other esbuild options as needed
     }).then(() => {
-        // After successful build, copy the file to the target directory
-        fs.copySync(
-            'dist/hookui.js',
-            "../HookUI/Resources/hookui.js"
-        );
+        // Define the path to the LocalLow folder
+        const localLowPath = path.join(process.env.USERPROFILE, 'AppData', 'LocalLow');
+        // Define the complete destination path for LocalLow
+        const localLowDestPath = path.join(localLowPath, 'Colossal Order', 'Cities Skylines II', 'Mods', 'HookUI', 'hookui.js');
+
+        // Copy the file to the LocalLow target directory
+        fs.copySync('dist/hookui.js', localLowDestPath, { overwrite: true });
+
+        // Define the destination path for "../HookUI/Resources/hookui.js"
+        const hookUIDestPath = path.resolve(__dirname, "../HookUI/Resources/hookui.js");
+
+        // Copy the file to the "../HookUI/Resources/hookui.js" directory
+        fs.copySync('dist/hookui.js', hookUIDestPath, { overwrite: true });
+
         done();
     }).catch((error) => {
         console.error(error);

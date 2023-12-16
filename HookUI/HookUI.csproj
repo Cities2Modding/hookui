@@ -29,7 +29,6 @@
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(CI)' == 'true'">
-		<Reference Include="HookUILib"><HintPath>..\lib\bin\Debug\netstandard2.1\HookUILib.dll</HintPath><Private>False</Private></Reference>
 		<Reference Include="../libcs2/Colossal.*.dll" Private="False" />
 		<Reference Include="../libcs2/Game.dll" Private="False" />
 		<Reference Include="../libcs2/Unity.*.dll" Private="False" />

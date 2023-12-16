@@ -5,9 +5,10 @@ namespace HookUILib.Core
     public enum ExtensionType
     {
         Panel,
-        // Setting
-        // Tooltip
-        // Other fun injection points
+        Options, // Game options panel
+        ToolSystem, // Small UI on tool systems
+        ApplicationButton, // E.g. chirps?
+        TabbedPanel, // The buttons near economy panel etc with tabbed windows
     }
 
     public class UIExtension

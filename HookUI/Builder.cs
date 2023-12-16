@@ -71,10 +71,39 @@ namespace HookUI
             return orig_text.Replace( src, dst );
         }
 
-        public static String HookPanelsMenu( String orig_text )
+        public static String HookInfomodePanelsMenu( String orig_text )
         {
             var src = "fge.lock})})})})]";
-            var dst = "fge.lock})})})}),(0,e.jsx)(window._$hookui_menu,{react:i})]";
+            var dst = "fge.lock})})})}),(0,e.jsx)(window._$hookui_toolbar_infomode_menu,{react:i})]";
+            return orig_text.Replace( src, dst );
+        }
+
+        public static String HookToolBarAdvisorMenu( String orig_text )
+        {
+            var src = "className:oge.pauseMenuLayout,children:[R&&(0,e.jsx)";
+            var dst = "className:oge.pauseMenuLayout,children:[(0,e.jsx)(window._$hookui_toolbar_pause_menu,{react:i}),R&&(0,e.jsx)";
+            return orig_text.Replace( src, dst );
+        }
+
+        public static String HookAdvisorPanel( String orig_text )
+        {
+            var src = "className:bSe.cardPanel})})]}),(0,e.jsxs)";
+            var dst = "className:bSe.cardPanel})}),(0,e.jsx)(window._$hookui_pause_panel,{react:i})]}),(0,e.jsxs)";
+            return orig_text.Replace( src, dst );
+        }
+
+        public static String HookToolBarStart( String orig_text )
+        {
+            var src = "(0,e.jsx)(vEe,{})]";
+            var dst = "(0,e.jsx)(vEe,{}),(0,e.jsx)(window._$hookui_toolbar_start_menu,{react:i})]";
+            return orig_text.Replace( src, dst );
+        }
+        //
+
+        public static String HookToolBarEnd( String orig_text )
+        {
+            var src = "(0,e.jsx)(HEe,{})]";
+            var dst = "(0,e.jsx)(HEe,{}),(0,e.jsx)(window._$hookui_toolbar_end_menu,{react:i})]";
             return orig_text.Replace( src, dst );
         }
 
@@ -133,7 +162,11 @@ namespace HookUI
             TransformFile( "index.js", ( contents ) =>
             {
                 contents = InjectHookUILoader( contents );
-                contents = HookPanelsMenu( contents );
+                contents = HookInfomodePanelsMenu( contents );
+                contents = HookToolBarStart( contents );
+                contents = HookToolBarAdvisorMenu( contents );
+                contents = HookAdvisorPanel( contents );
+                contents = HookToolBarEnd( contents );
                 return contents;
             } );
 

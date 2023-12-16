@@ -31,15 +31,31 @@
     <Content Include="gulpfile.js" />
     <Content Include="package.json" />
     <Content Include="README.md" />
+    <Content Include="src\jsx\components\_foldout.jsx" />
+    <Content Include="src\jsx\components\_icon-button.jsx" />
+    <Content Include="src\jsx\components\_icon-toolbar.jsx" />
+    <Content Include="src\jsx\components\_infomode-button.jsx" />
+    <Content Include="src\jsx\components\_scrollable.jsx" />
+    <Content Include="src\jsx\components\_tooltip-content.jsx" />
+    <Content Include="src\jsx\components\_tooltip.jsx" />
+    <Content Include="src\jsx\menus\toolbars\_toolbar-infomode.jsx" />
+    <Content Include="src\jsx\menus\toolbars\_toolbar-pause.jsx" />
+    <Content Include="src\jsx\menus\toolbars\_toolbar-start.jsx" />
+    <Content Include="src\jsx\menus\toolbars\_toolbar-end.jsx" />
+    <Content Include="src\jsx\menus\_pause-panel.jsx" />
+    <Content Include="src\jsx\menus\_infomode.jsx" />
     <Content Include="src\js\_api.js" />
     <Content Include="src\jsx\_loader.jsx" />
-    <Content Include="src\jsx\_menu.jsx" />
+    <Content Include="src\js\_menu.jsx" />
     <Content Include="src\js\hookui.js" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="dist\" />
     <Folder Include="src\" />
     <Folder Include="src\jsx\" />
+    <Folder Include="src\jsx\menus\" />
+    <Folder Include="src\jsx\menus\toolbars\" />
+    <Folder Include="src\jsx\components\" />
     <Folder Include="src\js\" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\Node.js Tools\Microsoft.NodejsToolsV2.targets" />

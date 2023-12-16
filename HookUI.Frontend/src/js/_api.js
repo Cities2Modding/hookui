@@ -29,3 +29,8 @@ window._$hookui.registerPanel = ({id, name, icon, component, body, panel_style})
     }
     window._$hookui.__registeredPanels[id] = {id, name, icon, component, body, panel_style}
 }
+
+window._$hookui.toggleVisibility = (id) => {   
+    const event = new CustomEvent('hookui', { detail: { type: "toggle_visibility", id: id } });
+    window.dispatchEvent(event);
+}

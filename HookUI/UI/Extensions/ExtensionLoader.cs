@@ -52,6 +52,5 @@ namespace HookUI.UI.Extensions
         {
             Extensions.Add( id );
         }
-
     }
 }

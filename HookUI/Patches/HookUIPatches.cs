@@ -38,7 +38,7 @@ namespace HookUI.Patches
             [HarmonyPostfix]
             public static void Postfix( UpdateSystem updateSystem )
             {
-                updateSystem.UpdateAt<HookUIUISystem>( SystemUpdatePhase.GameSimulation );
+                updateSystem.UpdateAt<HookUIUISystem>( SystemUpdatePhase.UIUpdate );
             }
         }
 
