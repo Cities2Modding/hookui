@@ -39,11 +39,13 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\hookui.api.js" />
 	  <None Remove="Resources\hookui.js" />
 	  <None Remove="Resources\index.html" />
 	</ItemGroup>
 
 	<ItemGroup>
+	  <EmbeddedResource Include="Resources\hookui.api.js" />
 	  <EmbeddedResource Include="Resources\hookui.js" />
 	  <EmbeddedResource Include="Resources\index.html" />
 	</ItemGroup>

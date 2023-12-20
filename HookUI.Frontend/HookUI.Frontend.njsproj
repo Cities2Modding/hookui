@@ -28,6 +28,8 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="dist\hookui.api.js" />
+    <Content Include="dist\hookui.js" />
     <Content Include="gulpfile.js" />
     <Content Include="package.json" />
     <Content Include="README.md" />
@@ -42,12 +44,24 @@
     <Content Include="src\jsx\menus\toolbars\_toolbar-pause.jsx" />
     <Content Include="src\jsx\menus\toolbars\_toolbar-start.jsx" />
     <Content Include="src\jsx\menus\toolbars\_toolbar-end.jsx" />
-    <Content Include="src\jsx\menus\_pause-panel.jsx" />
-    <Content Include="src\jsx\menus\_infomode.jsx" />
-    <Content Include="src\js\_api.js" />
+    <Content Include="src\jsx\panels\_pause-panel.jsx" />
+    <Content Include="src\jsx\panels\_infomode-panel.jsx" />
+    <Content Include="src\jsx\_main-container.jsx" />
+    <Content Include="src\js\api\.babelrc" />
+    <Content Include="src\js\api\.eslintrc" />
+    <Content Include="src\js\api\helpers\_dom.js" />
+    <Content Include="src\js\api\import.js" />
+    <Content Include="src\js\api\systems\_binding-promise.js" />
+    <Content Include="src\js\api\_core.js" />
+    <Content Include="src\js\api\systems\_bindings.js" />
+    <Content Include="src\js\api\systems\_events.js" />
+    <Content Include="src\js\api\_legacy.js" />
+    <Content Include="src\js\api\_logger.js" />
+    <Content Include="src\js\api\systems\_plugins.js" />
+    <Content Include="src\js\api\plugins\_plugin-types.js" />
+    <Content Include="src\js\api\plugins\_plugin.js" />
     <Content Include="src\jsx\_loader.jsx" />
-    <Content Include="src\js\_menu.jsx" />
-    <Content Include="src\js\hookui.js" />
+    <Content Include="src\js\ui\hookui.js" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="dist\" />
@@ -56,7 +70,13 @@
     <Folder Include="src\jsx\menus\" />
     <Folder Include="src\jsx\menus\toolbars\" />
     <Folder Include="src\jsx\components\" />
+    <Folder Include="src\jsx\panels\" />
     <Folder Include="src\js\" />
+    <Folder Include="src\js\api\" />
+    <Folder Include="src\js\api\helpers\" />
+    <Folder Include="src\js\api\systems\" />
+    <Folder Include="src\js\api\plugins\" />
+    <Folder Include="src\js\ui\" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\Node.js Tools\Microsoft.NodejsToolsV2.targets" />
 </Project>

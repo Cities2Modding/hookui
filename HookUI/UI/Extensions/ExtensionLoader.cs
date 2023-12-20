@@ -35,7 +35,7 @@ namespace HookUI.UI.Extensions
                 var uiName = type.FullName;
                 var extensionID = type.GetField( "extensionID", BindingFlags.Public | BindingFlags.Instance ).GetValue( instance );
                 var extensionContent = ( string ) type.GetField( "extensionContent", BindingFlags.Public | BindingFlags.Instance ).GetValue( instance );
-                var extensionFilename = $"panel.{extensionID}.js";
+                var extensionFilename = $"{extensionID}.js";
 
                 Debug.Log( $"{uiName} extensionPath: {extensionID}, extensionContent length: {extensionContent.Length}" );
 

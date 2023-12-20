@@ -4,11 +4,14 @@ namespace HookUILib.Core
 {
     public enum ExtensionType
     {
-        Panel,
-        Options, // Game options panel
-        ToolSystem, // Small UI on tool systems
-        ApplicationButton, // E.g. chirps?
-        TabbedPanel, // The buttons near economy panel etc with tabbed windows
+        InfoPanel,
+        AdvisorPanel,
+        ToolBarStart,
+        ToolBarEnd,
+        MainContainer,
+        Custom,
+        Panel // Should rename to Legacy eventually, left as
+              // panel to maintain compatibility.
     }
 
     public class UIExtension

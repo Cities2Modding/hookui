@@ -1,0 +1,26 @@
+{
+  "parser": "@babel/eslint-parser",
+  "env": {
+    "browser": true,
+    "es2020": true
+  },
+  "extends": "eslint:recommended",
+  "globals": {
+    "engine": "readonly"
+    // Add other global variables here as needed
+  },
+  "rules": {
+    "indent": [ "error", 4 ],
+    "quotes": [ "error", "double" ],
+    "semi": [ "error", "always" ],
+    "no-unused-vars": [
+      "warn",
+      {
+        "vars": "all",
+        "args": "none",
+        "ignoreRestSiblings": false
+      }
+    ],
+    "no-console": "off"
+  }
+}

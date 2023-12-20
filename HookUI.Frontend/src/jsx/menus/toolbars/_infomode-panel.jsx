@@ -5,6 +5,21 @@ import $Scrollable from '../components/_scrollable'
 const $HookUIPausePanel = ({ react }) => {
     const [active, setActive] = react.useState(false);
     const [expanded, setExpanded] = react.useState(true);
+    const [selectedItem, setSelectedItem] = react.useState('');
+
+    react.useEffect(() => {
+        const bindingPromise = HookUIBindings.subscribe(HookUIBindings.PLUGIN_TYPE_OPEN, (pluginType, isOpen) => {
+            if (pluginType !== HookUIPluginType.INFO_PANEL)
+                return;
+            setActive(isOpen);
+
+            HookUI.playPanelSound(isOpen);
+            HookUI.playSound();
+        });
+        return () => {
+            bindingPromise.unsubscribe();
+        };
+    }, []);
 
     react.useEffect(() => {
         // Define a global function
@@ -30,15 +45,22 @@ const $HookUIPausePanel = ({ react }) => {
         engine.trigger("audio.playSound", "expand-panel", 1);
     };
 
-    const options = window._$hookui.__registeredPanels;
+    const options = HookUI.getPlugins();
 
     const getOptions = () => {
         const ks = Object.keys(options);
 
         return ks.map((k) => {
             const option = options[k];
-            return <$FoldOut key={'hk_btn_' + k} disableFoldout="true" react={react} icon={option.icon} label={option.name.toUpperCase()} level="1">
-            </$FoldOut>
+            const selected = selectedItem === option.name;
+            const onItemClick = () => {
+                if (selectedItem === option.name)
+                    setSelectedItem('');
+                else
+                    setSelectedItem(option.name);
+                HookUI.toggle(option.id);
+            };
+            return <$FoldOut key={'hk_btn_' + k} onItemClick={onItemClick} selected={selected} disableFoldout="true" react={react} icon={option.icon} label={option.name} level="1"></$FoldOut>
         });
     };
 

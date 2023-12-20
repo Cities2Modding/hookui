@@ -4,32 +4,25 @@ import $ToolTipContent from '../../components/_tooltip-content'
 
 const $HookUIToolBarPauseMenu = ({ react }) => {
     const [active, setActive] = react.useState(false);
+    const [hasPlugins, setHasPlugins] = react.useState(false);
 
-
-    react.useEffect(() => {
-        // Define a global function
-        window._$hookui.pause_panel_toggle_btn = (value) => {
-            setActive(value);
-        };
-
-        // Clean up the global function when the component unmounts
-        return () => {
-            delete window._$hookui.pause_panel_toggle_btn;
-        };
-    }, []);
+    HookUIPlugins.useType(react, HookUIPluginType.ADVISOR_PANEL, (hasPlugins) => {
+        setHasPlugins(hasPlugins);
+    }, (isOpen) => {
+        setActive(isOpen);
+    });    
 
     const toggleMenu = () => {
-        window._$hookui.pause_panel_toggle(!active);
-    };
+        const newValue = !active;
+        setActive(newValue);
+        HookUI.playSound();
+        HookUI.togglePluginType(HookUIPluginType.ADVISOR_PANEL, newValue);
+    };    
 
-    return (
-        <>
-            <$IconButton hideTooltip={active} react={react} onClick={toggleMenu} selected={active} holdTooltipOnSelected="false" icon="coui://hookuiresources/toolbox_white.svg"
-                tooltipFloat="down" tooltipAlign="right" infoModeStyle="true" tooltipStyle={{ marginTop: '5rem' }} style={{ marginRight: '9rem' }}>
-                <$ToolTipContent title="HookUI - Settings" description="Change mod settings" />
-            </$IconButton>
-        </>
-    );
+    return hasPlugins ? <$IconButton hideTooltip={active} react={react} onClick={toggleMenu} selected={active} holdTooltipOnSelected="false" icon="coui://hookuiresources/toolbox_white.svg"
+        tooltipFloat="down" tooltipAlign="right" infoModeStyle="true" tooltipStyle={{ marginTop: '5rem' }} style={{ marginRight: '9rem' }}>
+        <$ToolTipContent title="HookUI - Settings" description="Change mod settings" />
+    </$IconButton> : null;
 }
 
-window._$hookui_toolbar_pause_menu = $HookUIToolBarPauseMenu;
+window._$hookui.toolbar_pause_menu = $HookUIToolBarPauseMenu;

@@ -2,19 +2,37 @@ import React from 'react'
 import $IconToolBar from '../../components/_icon-toolbar'
 
 const $HookUIToolBarEndMenu = ({ react }) => {
-    return (
+    const [active, setActive] = react.useState(false);
+    const [hasPlugins, setHasPlugins] = react.useState(false);
+    
+    HookUIPlugins.useType(react, HookUIPluginType.TOOLBAR_END, (hasPlugins) => {
+        setHasPlugins(hasPlugins);
+    }, (isOpen) => {
+        setActive(isOpen);
+    });
+
+    const toggleMenu = (n) => {
+        const newValue = !active;
+        setActive(newValue);
+        HookUI.playSound();
+        HookUI.togglePluginType(HookUIPluginType.TOOLBAR_END, newValue);
+    };
+
+    return hasPlugins ? (
         <>
             <div className="spacer_oEi"></div>
             <$IconToolBar react={react}
-                title="HookUI - Info & Systems"
+                title="HookUI - Systems"
                 icon="coui://hookuiresources/toolbox.svg"
-                description="Mod information views and systems"
-                options={window._$hookui.__registeredPanels}
+                description="Misc mods and systems"
+                active={active}
+                options={HookUI.getPlugins(HookUIPluginType.TOOLBAR_END)}
                 noBorder="false"
                 tooltipFloat="up" tooltipAlign="right"
-                onItemClick={(option) => window._$hookui.toggleVisibility(option.id)} />
+                onClick={toggleMenu}
+                onItemClick={(option) => HookUI.toggle(option.id)} />
         </>
-    );
+    ) : null;
 }
 
-window._$hookui_toolbar_end_menu = $HookUIToolBarEndMenu;
+window._$hookui.toolbar_end_menu = $HookUIToolBarEndMenu;

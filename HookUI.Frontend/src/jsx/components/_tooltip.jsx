@@ -1,6 +1,6 @@
 import React from 'react'
 
-const $ToolTip = ({ react, style, children, visible, containerStyle, clickable, float, align }) => {
+const $ToolTip = React.forwardRef(({ react, style, children, visible, containerStyle, clickable, float, align, inline }, ref) => {
     const tooltipStyle = visible ? { opacity: 1, pointerEvents: clickable ? 'auto' : 'none' } : { opacity: 0, pointerEvents: 'none' };
 
     const positionStyle = float === "up" && align === "left" ? {
@@ -55,16 +55,18 @@ const $ToolTip = ({ react, style, children, visible, containerStyle, clickable, 
     let tooltipClassNames = "balloon_ltu balloon_qJY balloon_H23 anchored-balloon_AYp";
     tooltipClassNames += float === "up" ? " up_ehW up_el0" : float == "down" ? " down_ztr down_Xl7" : float == "left" ? " left_LHd left_SI8" : " right_JdH right_RQp";
     tooltipClassNames += " ";
-    //tooltipClassNames += align === "left" ? " start_wu1" : align === "right" ? " end_EKq" : " center_hug";
     tooltipClassNames += align === "left" ? " end_EKq" : align === "right" ? " start_wu1" : " center_hug";
 
     const arrowClassNames = "arrow_R9U arrow_SVb " + (align === " right" ? "" : " arrow_Xfn");
 
+    const inlineStyle = !inline ? { minWidth: '150rem' } : {};
+    const inlineSubStyle = !inline ? { flex: 1 } : { width: 'auto' };
+    
     return (<div className={tooltipClassNames} style={{
         position: 'absolute',
         ...positionStyle,
         width: 'auto',
-        'minWidth': '150rem',
+        ...inlineStyle,
         display: 'flex',
         transition: 'opacity 0.2s easeOut',
         transitionDelay: '0.2s',
@@ -72,8 +74,8 @@ const $ToolTip = ({ react, style, children, visible, containerStyle, clickable, 
         ...tooltipStyle,
         ...style
     }}>
-        <div className="bounds__AO" style={{
-            flex: 1,
+        <div ref={ref} className="bounds__AO" style={{
+            ...inlineSubStyle,
             display: 'flex',
             transition: 'opacity 0.2s easeOut',
             transitionDelay: '0.2s',
@@ -89,6 +91,6 @@ const $ToolTip = ({ react, style, children, visible, containerStyle, clickable, 
             </div>
         </div>
     </div>);
-}
+});
 
 export default $ToolTip;

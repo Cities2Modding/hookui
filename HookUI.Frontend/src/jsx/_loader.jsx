@@ -1,54 +1,30 @@
 import React from 'react'
 import {$Panel} from 'hookui-framework'
 
-const loadExtensions = (extensions) => {
-    extensions.forEach(extension => {
-        const script = document.createElement('script');
-        script.src = "Extensions/" + extension;
-        script.async = true;
-        script.className = "hookui_extension"; // Assign a class name
-        document.head.appendChild(script);
-    });
-};
-
 const $Loader = ({ react }) => {
-    const [visibleComponents, setVisibleComponents] = react.useState([])
+    const [visibleComponents, setVisibleComponents] = react.useState([]);
 
-    react.useEffect(() => {
-        const handleEvent = (e) => {
-            const {id, type} = e.detail
-            if (visibleComponents.includes(id)) {
-                setVisibleComponents(visibleComponents.filter(id_b => id !== id_b))
-            } else {
-                setVisibleComponents(visibleComponents => [...visibleComponents, id]);
-            }
-        }
+    //react.useEffect(() => {
+    //    const handleEvent = (e) => {
+    //        const { id, type } = e.detail
+    //        if (visibleComponents.includes(id)) {
+    //            setVisibleComponents(visibleComponents.filter(id_b => id !== id_b))
+    //        } else {
+    //            setVisibleComponents(visibleComponents => [...visibleComponents, id]);
+    //        }
+    //    }
 
-        window.addEventListener('hookui', handleEvent)
-        return () => {
-            window.removeEventListener('hookui', handleEvent)
-        };
-    }, [visibleComponents])
+    //    HookUIEvents.register(HookUIPluginType.LEGACY, handleEvent);
 
-    react.useEffect(() => {
-        console.log('listening to avilable extensions')
-        engine.on('hookui.available_extensions.update', (extensions) => {
-            console.log('These are extensions we need to auto load:', extensions);
-            loadExtensions(extensions);
-        })
-        engine.trigger('hookui.available_extensions.subscribe');
+    //    return () => {
+    //        HookUIEvents.unregister(HookUIPluginType.LEGACY, handleEvent);
+    //    };
+    //}, [visibleComponents]);
 
-        return () => {
-            engine.trigger('hookui.available_extensions.unsubscribe')
-            document.querySelectorAll('head script.hookui_extension').forEach(script => {
-                document.head.removeChild(script);
-            });
-        }
-    }, [])
-
-    const panels = Object.keys(window._$hookui.__registeredPanels)
-    .filter(i => visibleComponents.includes(i))
-    .map(k => window._$hookui.__registeredPanels[k])
+    const plugins = HookUI.getPlugins(HookUIPluginType.LEGACY);
+    const panels = Object.keys(plugins)
+        .filter(i => visibleComponents.includes(i))
+        .map(k => plugins[k])
 
     const to_render = panels.map(p => {
         if (p.component) {
